@@ -1,1 +1,102 @@
+:root {
+  --border-color: #ccc;
+}
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.container {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  border: 1px solid rgb(232, 232, 232);
+  box-shadow: 0 3px 10px rgb(155, 155, 155);
+  padding: 3rem 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.header h1 {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.todo-input {
+  display: flex;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-top: 2rem;
+  outline: none;
+  width: 45rem;
+}
+
+.todo-input::placeholder {
+  font-style: italic;
+  font-size: 1.7rem;
+  padding-left: 1.5rem;
+}
+
+.fa-plus {
+  position: relative;
+  left: 43.7rem;
+  bottom: 3.5rem;
+  font-size: 1.7rem;
+  color: rgb(189, 189, 189);
+}
+
+.fa-plus:hover {
+  cursor: pointer;
+  color: rgb(64, 199, 64);
+}
+
+.fa-plus:active {
+  cursor: pointer;
+  color: rgb(39, 162, 39);
+}
+
+.clear-tasks {
+  background: rgb(234, 234, 234);
+  height: 70px;
+  width: 94%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1.3rem;
+  box-shadow: 0 3px 5px rgb(202, 202, 202);
+}
+
+.clear {
+  font-size: 1.7rem;
+  color: rgb(75, 75, 75);
+  text-decoration: none;
+}
+
+.clear:hover {
+  color: rgb(127, 127, 127);
+  text-decoration: underline;
+}
