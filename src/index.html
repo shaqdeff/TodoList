@@ -4,8 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/eb57cf8ccf.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Todos</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <main>
+        <h1>Today's To Do</h1>
+        <i class="fa fa-sync"></i>
+        <form>
+          <input
+            type="text"
+            class="todo-input"
+            id="todoInput"
+            placeholder="Add to your list..."
+          />
+          <i class="fa fa-plus"></i>
+        </form>
+        <ul class="todo-list"></ul>
+      </main>
+    </div>
+  </body>
 </html>
