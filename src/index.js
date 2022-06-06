@@ -2,6 +2,7 @@ import './style.css';
 
 // Array to hold todo list items
 const todoItems = [];
+let index = 0;
 
 const renderTodo = (todo) => {
   // select ul element
@@ -30,9 +31,10 @@ const addTodo = (description) => {
   const todo = {
     description,
     completed: false,
-    index: Date.now(),
+    index: index,
   };
 
+  index += 1;
   todoItems.push(todo);
   renderTodo(todo);
 };
