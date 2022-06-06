@@ -36,6 +36,7 @@
     "webpack-dev-server": "^4.9.1"
   },
   "dependencies": {
+    "@lhci/cli": "^0.9.0",
     "lighthouse": "^9.6.1"
   }
 }
