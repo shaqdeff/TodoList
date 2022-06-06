@@ -5,6 +5,8 @@ let todoItems = [];
 let index = 0;
 
 const renderTodo = (todo) => {
+  // local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
   // select ul element
   const list = document.querySelector('.todo-list');
   // select current item in the DOM
@@ -28,7 +30,6 @@ const renderTodo = (todo) => {
   <input id="${todo.index}" type="checkbox"/>
   <label for="${todo.index}" class="tick js-tick"></label>
   <span class="todo-desc" contenteditable="true">${todo.description}</span>
-  <i class="fa fa-edit" id="edit"></i>
   <i class="fa fa-trash-alt delete"></i>
   `;
 
@@ -116,8 +117,10 @@ list.addEventListener('click', (e) => {
   }
 });
 
+// edit task descriptions
+
 list.addEventListener('click', (e) => {
-  if (e.target.tagName === 'I') {
+  if (e.target.tagName === 'SPAN') {
     const icon = e.target;
     const li = icon.parentElement;
     list = li.parentElement;
@@ -137,5 +140,15 @@ list.addEventListener('click', (e) => {
     console.log('delete');
     const itemKey = e.target.parentElement.dataset.key;
     deleteTodo(itemKey);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ref = localStorage.getItem('todoItems');
+  if (ref) {
+    todoItems = JSON.parse(ref);
+    todoItems.forEach(t => {
+      renderTodo(t);
+    });
   }
 });
