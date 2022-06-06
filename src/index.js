@@ -121,7 +121,9 @@ list.addEventListener('click', (e) => {
 
 list.addEventListener('click', (e) => {
   if (e.target.tagName === 'SPAN') {
+    /* eslint-disable no-undef */
     const icon = e.target;
+    /* eslint-disable no-undef */
     const li = icon.parentElement;
     list = li.parentElement;
   }
@@ -137,7 +139,6 @@ list.addEventListener('click', (e) => {
 // add click event listener to trash icon
 list.addEventListener('click', (e) => {
   if (e.target.classList.contains('delete')) {
-    console.log('delete');
     const itemKey = e.target.parentElement.dataset.key;
     deleteTodo(itemKey);
   }
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ref = localStorage.getItem('todoItems');
   if (ref) {
     todoItems = JSON.parse(ref);
-    todoItems.forEach(t => {
+    todoItems.forEach((t) => {
       renderTodo(t);
     });
   }
