@@ -27,8 +27,8 @@ const renderTodo = (todo) => {
   li.innerHTML = `
   <input id="${todo.index}" type="checkbox"/>
   <label for="${todo.index}" class="tick js-tick"></label>
-  <span class="todo-desc">${todo.description}</span>
-  <i class="fa fa-edit edit"></i>
+  <span class="todo-desc" contenteditable="true">${todo.description}</span>
+  <i class="fa fa-edit" id="edit"></i>
   <i class="fa fa-trash-alt delete"></i>
   `;
 
@@ -105,9 +105,8 @@ plusIcon.addEventListener('click', () => {
   }
 });
 
-
 // select entire list
-const list = document.querySelector('.todo-list');
+let list = document.querySelector('.todo-list');
 
 // Add a click event listener to the list and its children
 list.addEventListener('click', (e) => {
@@ -117,9 +116,25 @@ list.addEventListener('click', (e) => {
   }
 });
 
+list.addEventListener('click', (e) => {
+  if (e.target.tagName === 'I') {
+    const icon = e.target;
+    const li = icon.parentElement;
+    list = li.parentElement;
+  }
+  if (icon.className === 'fa-edit') {
+    const span = document.querySelector('.todo-desc');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = span.textContent;
+    li.insertBefore(input, span);
+  }
+});
+
 // add click event listener to trash icon
 list.addEventListener('click', (e) => {
   if (e.target.classList.contains('delete')) {
+    console.log('delete');
     const itemKey = e.target.parentElement.dataset.key;
     deleteTodo(itemKey);
   }

@@ -107,11 +107,13 @@ body {
 }
 
 .todo-item span {
+  display: flex;
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
   font-size: 16px;
   color: rgb(104, 104, 104);
+  outline: none;flex-wrap: nowrap;
 }
 
 .done span {
