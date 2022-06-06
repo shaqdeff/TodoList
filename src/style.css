@@ -78,6 +78,84 @@ body {
   color: rgb(39, 162, 39);
 }
 
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  width: 100%;
+  position: relative;
+}
+
+.todo-item {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.4rem;
+}
+
+.todo-item span {
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  color: rgb(104, 104, 104);
+}
+
+.done span {
+  text-decoration: line-through;
+  color: rgb(148, 148, 148);
+}
+
+input[type="checkbox"] {
+  display: none;
+  width: 15px;
+  height: 15px;
+  margin-left: 1rem;
+}
+
+.tick {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.tick::before {
+  content: "✓";
+  font-size: 18px;
+  display: none;
+  color: rgb(114, 114, 114);
+}
+
+.done .tick::before {
+  display: inline;
+}
+
+.fa-trash-alt {
+  position: absolute;
+  left: 43.7rem;
+  font-size: 1.7rem;
+  color: var(--border-color);
+}
+
+.fa-trash-alt:hover {
+  cursor: pointer;
+  color: rgb(208, 53, 53);
+}
+
+.fa-trash-alt:active {
+  color: rgb(210, 0, 0);
+}
+
 .clear-tasks {
   background: rgb(234, 234, 234);
   height: 70px;

@@ -3,6 +3,28 @@ import './style.css'
 // Array to hold todo list items
 let todoItems = [];
 
+const renderTodo = todo => {
+  // select ul element
+  const list = document.querySelector('.todo-list')
+
+  // check if todo is completed 
+  const isCompleted = todo.completed ? 'done' : '';
+
+  // create li element 
+  const li = document.createElement('li');
+  li.setAttribute('class', `todo-item ${isCompleted}`);
+  li.setAttribute('data-key', todo.index);
+
+  li.innerHTML = `
+    <input id="${todo.index}" type="checkbox"/>
+    <label for="${todo.index}" class="tick js-tick"></label>
+    <span>${todo.description}</span>
+    <i class="fa fa-trash-alt"></i>
+  `;
+
+  list.append(li);
+}
+
 // Function to create new todo object
 const addTodo = description => {
   const todo = {
@@ -12,9 +34,10 @@ const addTodo = description => {
   }
 
   todoItems.push(todo);
-  console.log(todoItems);
+  renderTodo(todo);
 }
 
+// select form
 const form = document.querySelector('.todo-form');
 // Add a submit event listener to form
 form.addEventListener('submit', e => {
@@ -31,4 +54,20 @@ form.addEventListener('submit', e => {
     input.value = '';
     input.focus();
   }
+
 });
+
+//  select plus icon
+const plusIcon = document.querySelector('.add');
+// Add an event click listener to the plus icon
+plusIcon.addEventListener('click', () => {
+  const input = document.getElementById('todoInput');
+  const description = input.value.trim();
+  if (description.length) {
+    addTodo(description);
+    input.value = '';
+    input.focus();
+  }
+});
+
+
