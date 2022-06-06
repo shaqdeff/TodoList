@@ -149,6 +149,22 @@ input[type="checkbox"] {
   display: inline;
 }
 
+.fa-edit {
+  position: absolute;
+  left: 40rem;
+  font-size: 1.8rem;
+  color: var(--border-color);
+}
+
+.fa-edit:hover {
+  cursor: pointer;
+  color: rgb(225, 144, 73);
+}
+
+.fa-edit:active {
+  color: rgb(208, 112, 29);
+}
+
 .fa-trash-alt {
   position: absolute;
   left: 43.7rem;
