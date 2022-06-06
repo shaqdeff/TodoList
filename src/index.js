@@ -20,7 +20,7 @@ const renderTodo = (todo) => {
     <input id="${todo.index}" type="checkbox"/>
     <label for="${todo.index}" class="tick js-tick"></label>
     <span>${todo.description}</span>
-    <i class="fa fa-trash-alt"></i>
+    <i class="fa fa-trash-alt delete"></i>
   `;
 
   list.append(li);
@@ -37,6 +37,7 @@ const addTodo = (description) => {
   index += 1;
   todoItems.push(todo);
   renderTodo(todo);
+  console.log(todoItems);
 };
 
 // select form
@@ -70,3 +71,14 @@ plusIcon.addEventListener('click', () => {
     input.focus();
   }
 });
+
+// delete todo items
+// select entire list
+const list = document.querySelector('.todo-list');
+
+// add click event listener to trash icon
+list.addEventListener('click', e => {
+  if (e.target.classList.contains('delete')) {
+    e.target.parentElement.remove()
+  }
+})
