@@ -31,7 +31,7 @@ const addTodo = (description) => {
   const todo = {
     description,
     completed: false,
-    index: index,
+    index,
   };
 
   index += 1;
