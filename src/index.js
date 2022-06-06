@@ -1,16 +1,16 @@
-import './style.css'
+import './style.css';
 
 // Array to hold todo list items
-let todoItems = [];
+const todoItems = [];
 
-const renderTodo = todo => {
+const renderTodo = (todo) => {
   // select ul element
-  const list = document.querySelector('.todo-list')
+  const list = document.querySelector('.todo-list');
 
-  // check if todo is completed 
+  // check if todo is completed
   const isCompleted = todo.completed ? 'done' : '';
 
-  // create li element 
+  // create li element
   const li = document.createElement('li');
   li.setAttribute('class', `todo-item ${isCompleted}`);
   li.setAttribute('data-key', todo.index);
@@ -23,24 +23,24 @@ const renderTodo = todo => {
   `;
 
   list.append(li);
-}
+};
 
 // Function to create new todo object
-const addTodo = description => {
+const addTodo = (description) => {
   const todo = {
     description,
     completed: false,
     index: Date.now(),
-  }
+  };
 
   todoItems.push(todo);
   renderTodo(todo);
-}
+};
 
 // select form
 const form = document.querySelector('.todo-form');
 // Add a submit event listener to form
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   // prevent default
   e.preventDefault();
 
@@ -54,7 +54,6 @@ form.addEventListener('submit', e => {
     input.value = '';
     input.focus();
   }
-
 });
 
 //  select plus icon
@@ -69,5 +68,3 @@ plusIcon.addEventListener('click', () => {
     input.focus();
   }
 });
-
-
