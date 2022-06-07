@@ -107,11 +107,13 @@ body {
 }
 
 .todo-item span {
+  display: flex;
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
   font-size: 16px;
   color: rgb(104, 104, 104);
+  outline: none;
 }
 
 .done span {
@@ -147,6 +149,28 @@ input[type="checkbox"] {
 
 .done .tick::before {
   display: inline;
+}
+
+.edit {
+  position: absolute;
+  left: 39rem;
+  font-size: 1.4rem;
+  color: #333;
+  background: rgb(186, 186, 186);
+  outline: none;
+  padding: 2px 6px;
+  border: none;
+}
+
+.edit:hover {
+  cursor: pointer;
+  background: rgb(225, 144, 73);
+  color: #333;
+}
+
+.edit:active {
+  color: #333;
+  background: rgb(208, 112, 29);
 }
 
 .fa-trash-alt {
