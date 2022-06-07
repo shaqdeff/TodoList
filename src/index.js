@@ -59,19 +59,18 @@ const deleteTodo = (key) => {
 
   // remove todo item from array
   todoItems = todoItems.filter((item) => item.index !== Number(key));
-  
+
   // update the index of the remaining todo items
   todoItems.forEach((item, i) => {
     item.index = i;
   });
-  
+
   // save to local storage
   localStorage.setItem('todoItems', JSON.stringify(todoItems));
 
   // render the todo list
   renderTodo(todo);
 };
-
 
 // select form
 const form = document.querySelector('.todo-form');
@@ -153,7 +152,6 @@ list.addEventListener('click', (e) => {
     // delete task
     deleteTodo(itemKey);
     renderTodo();
-
   }
 });
 
