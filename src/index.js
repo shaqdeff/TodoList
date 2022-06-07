@@ -42,8 +42,17 @@ const addTodo = (description) => {
 };
 
 const toggleDone = (key) => {
+// find item in the todo items array
   const index = todoItems.findIndex((item) => item.index === Number(key));
-  todoItems[index].completed = !todoItems[index].completed;
+  // create new object with a completed property
+  const todo = {
+    ...todoItems[index],
+    completed: !todoItems[index].completed,
+  };
+  // update the todo item in the array
+  todoItems[index] = todo;
+  // save to local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
   renderTodo(todoItems[index]);
 };
 
@@ -121,6 +130,19 @@ list.addEventListener('click', (e) => {
     // Add contenteditable attribute to the task
     e.target.parentElement.querySelector('.todo-desc').setAttribute('contenteditable', 'true');
   }
+});
+
+// create event listener for clear button
+const clearBtn = document.querySelector('.clear');
+clearBtn.addEventListener('click', () => {
+  // delete all completed tasks from todoItems array
+  todoItems = todoItems.filter((item) => !item.completed);
+  // reorder the index of the remaining tasks
+  todoItems.forEach((item, index) => {
+    item.index = index;
+  });
+  // update todoItems array in local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
 });
 
 // create an event listener for each task
