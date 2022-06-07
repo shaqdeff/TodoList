@@ -41,21 +41,6 @@ const addTodo = (description) => {
   renderTodo();
 };
 
-const toggleDone = (key) => {
-// find item in the todo items array
-  const index = todoItems.findIndex((item) => item.index === Number(key));
-  // create new object with a completed property
-  const todo = {
-    ...todoItems[index],
-    completed: !todoItems[index].completed,
-  };
-  // update the todo item in the array
-  todoItems[index] = todo;
-  // save to local storage
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
-  renderTodo(todoItems[index]);
-};
-
 const deleteTodo = (key) => {
   // find item in the todo items array
   const index = todoItems.findIndex((item) => item.index === Number(key));
@@ -115,14 +100,6 @@ plusIcon.addEventListener('click', () => {
 
 // select entire list
 const list = document.querySelector('.todo-list');
-
-// Add a click event listener to the list and its children
-list.addEventListener('click', (e) => {
-  if (e.target.classList.contains('js-tick')) {
-    const itemKey = e.target.parentElement.dataset.key;
-    toggleDone(itemKey);
-  }
-});
 
 // edit task descriptions
 list.addEventListener('click', (e) => {
