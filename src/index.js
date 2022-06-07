@@ -1,4 +1,5 @@
 import './style.css';
+import { toggleDone } from './modules/status.js';
 
 const storageData = localStorage.getItem('todoItems');
 // Array to hold todo list items
@@ -39,12 +40,6 @@ const addTodo = (description) => {
   // save to local storage
   localStorage.setItem('todoItems', JSON.stringify(todoItems));
   renderTodo();
-};
-
-const toggleDone = (key) => {
-  const index = todoItems.findIndex((item) => item.index === Number(key));
-  todoItems[index].completed = !todoItems[index].completed;
-  renderTodo(todoItems[index]);
 };
 
 const deleteTodo = (key) => {
@@ -111,7 +106,8 @@ const list = document.querySelector('.todo-list');
 list.addEventListener('click', (e) => {
   if (e.target.classList.contains('js-tick')) {
     const itemKey = e.target.parentElement.dataset.key;
-    toggleDone(itemKey);
+    toggleDone(itemKey, todoItems);
+    renderTodo();
   }
 });
 
@@ -121,6 +117,19 @@ list.addEventListener('click', (e) => {
     // Add contenteditable attribute to the task
     e.target.parentElement.querySelector('.todo-desc').setAttribute('contenteditable', 'true');
   }
+});
+
+// create event listener for clear button
+const clearBtn = document.querySelector('.clear');
+clearBtn.addEventListener('click', () => {
+  // delete all completed tasks from todoItems array
+  todoItems = todoItems.filter((item) => !item.completed);
+  // reorder the index of the remaining tasks
+  todoItems.forEach((item, index) => {
+    item.index = index;
+  });
+  // update todoItems array in local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
 });
 
 // create an event listener for each task
