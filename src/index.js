@@ -1,4 +1,5 @@
 import './style.css';
+import { toggleDone } from './modules/status';
 
 const storageData = localStorage.getItem('todoItems');
 // Array to hold todo list items
@@ -100,6 +101,15 @@ plusIcon.addEventListener('click', () => {
 
 // select entire list
 const list = document.querySelector('.todo-list');
+
+// Add a click event listener to the list and its children
+list.addEventListener('click', (e) => {
+  if (e.target.classList.contains('js-tick')) {
+    const itemKey = e.target.parentElement.dataset.key;
+    toggleDone(itemKey, todoItems);
+    renderTodo();
+  }
+});
 
 // edit task descriptions
 list.addEventListener('click', (e) => {
