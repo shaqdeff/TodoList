@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export const toggleDone = (key, todoItems) => {
   // find item in the todo items array
   const index = todoItems.findIndex((item) => item.index === Number(key));

@@ -1,5 +1,5 @@
 import './style.css';
-import { toggleDone } from './modules/status';
+import { toggleDone } from './modules/status.js';
 
 const storageData = localStorage.getItem('todoItems');
 // Array to hold todo list items
