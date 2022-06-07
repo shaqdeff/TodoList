@@ -151,20 +151,26 @@ input[type="checkbox"] {
   display: inline;
 }
 
-.fa-edit {
+.edit {
   position: absolute;
-  left: 40rem;
-  font-size: 1.8rem;
-  color: var(--border-color);
+  left: 39rem;
+  font-size: 1.4rem;
+  color: #333;
+  background: rgb(186, 186, 186);
+  outline: none;
+  padding: 2px 6px;
+  border: none;
 }
 
-.fa-edit:hover {
+.edit:hover {
   cursor: pointer;
-  color: rgb(225, 144, 73);
+  background: rgb(225, 144, 73);
+  color: #333;
 }
 
-.fa-edit:active {
-  color: rgb(208, 112, 29);
+.edit:active {
+  color: #333;
+  background: rgb(208, 112, 29);
 }
 
 .fa-trash-alt {

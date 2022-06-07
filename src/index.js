@@ -1,56 +1,44 @@
 import './style.css';
 
+const storageData = localStorage.getItem('todoItems');
 // Array to hold todo list items
-let todoItems = [];
-let index = 0;
+let todoItems = (storageData) ? JSON.parse(localStorage.getItem('todoItems')) : [];
 
-const renderTodo = (todo) => {
+const renderTodo = () => {
   // local storage
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
-  // select ul element
-  const list = document.querySelector('.todo-list');
-  // select current item in the DOM
-  const item = document.querySelector(`[data-key='${todo.index}']`);
 
-  // remove item from DOM
-  if (todo.deleted) {
-    item.remove();
-    return;
-  }
+  let ulHTML = '';
+  todoItems.forEach((item) => {
+    // check if todo is completed
+    const isCompleted = item.completed ? 'done' : '';
 
-  // check if todo is completed
-  const isCompleted = todo.completed ? 'done' : '';
-
-  // create li element
-  const li = document.createElement('li');
-  li.setAttribute('class', `todo-item ${isCompleted}`);
-  li.setAttribute('data-key', todo.index);
-
-  li.innerHTML = `
-  <input id="${todo.index}" type="checkbox"/>
-  <label for="${todo.index}" class="tick js-tick"></label>
-  <span class="todo-desc" contenteditable="true">${todo.description}</span>
+    // create html for todo item
+    ulHTML += `
+    <li class="todo-item ${isCompleted}" data-key="${item.index}">
+  <input id="${item.index}" type="checkbox"/>
+  <label for="${item.index}" class="tick js-tick"></label>
+  <span class="todo-desc">${item.description}</span>
+  <button class="edit" id="editBtn" type="button">Edit</button>
   <i class="fa fa-trash-alt delete"></i>
+  </li>
   `;
-
-  if (item) {
-    list.replaceChild(li, item);
-  } else {
-    list.append(li);
-  }
+  });
+  // append todo items to the list
+  document.querySelector('.todo-list').innerHTML = ulHTML;
 };
 
 // Function to create new todo object
 const addTodo = (description) => {
-  const todo = {
+  // create new todo object
+  todoItems.push({
     description,
     completed: false,
-    index,
-  };
+    index: todoItems.length,
+  });
 
-  index += 1;
-  todoItems.push(todo);
-  renderTodo(todo);
+  // save to local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  renderTodo();
 };
 
 const toggleDone = (key) => {
@@ -71,6 +59,14 @@ const deleteTodo = (key) => {
 
   // remove todo item from array
   todoItems = todoItems.filter((item) => item.index !== Number(key));
+  // save to local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  // update the index of the remaining todo items
+  todoItems.forEach((item, i) => {
+    item.index = i;
+  });
+
+  // render todo item
   renderTodo(todo);
 };
 
@@ -107,7 +103,7 @@ plusIcon.addEventListener('click', () => {
 });
 
 // select entire list
-let list = document.querySelector('.todo-list');
+const list = document.querySelector('.todo-list');
 
 // Add a click event listener to the list and its children
 list.addEventListener('click', (e) => {
@@ -118,21 +114,24 @@ list.addEventListener('click', (e) => {
 });
 
 // edit task descriptions
-
 list.addEventListener('click', (e) => {
-  if (e.target.tagName === 'SPAN') {
-    /* eslint-disable no-undef */
-    const icon = e.target;
-    /* eslint-disable no-undef */
-    const li = icon.parentElement;
-    list = li.parentElement;
+  if (e.target.classList.contains('edit')) {
+    // Add contenteditable attribute to the task
+    e.target.parentElement.querySelector('.todo-desc').setAttribute('contenteditable', 'true');
   }
-  if (icon.className === 'fa-edit') {
-    const span = document.querySelector('.todo-desc');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = span.textContent;
-    li.insertBefore(input, span);
+});
+
+// create an event listener for each task
+list.addEventListener('keypress', (e) => {
+  if (e.target.classList.contains('todo-desc') && e.key === 'Enter') {
+    // Get the current value of the task description
+    const description = e.target.innerText;
+    // Update specific task in the task object
+    const itemKey = e.target.parentElement.dataset.key;
+    const index = todoItems.findIndex((item) => item.index === Number(itemKey));
+    todoItems[index].description = description;
+    // Update local storage
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
   }
 });
 
@@ -141,6 +140,11 @@ list.addEventListener('click', (e) => {
   if (e.target.classList.contains('delete')) {
     const itemKey = e.target.parentElement.dataset.key;
     deleteTodo(itemKey);
+
+    // reorder the index of the remaining tasks
+    todoItems.forEach((item, index) => {
+      item.index = index;
+    });
   }
 });
 
