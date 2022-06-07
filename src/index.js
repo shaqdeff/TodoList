@@ -14,7 +14,7 @@ const renderTodo = () => {
 
     // create html for todo item
     ulHTML += `
-    <li class="todo-item ${isCompleted}" data-key="${item.index}">
+  <li class="todo-item ${isCompleted}" data-key="${item.index}">
   <input id="${item.index}" type="checkbox"/>
   <label for="${item.index}" class="tick js-tick"></label>
   <span class="todo-desc">${item.description}</span>
@@ -59,16 +59,19 @@ const deleteTodo = (key) => {
 
   // remove todo item from array
   todoItems = todoItems.filter((item) => item.index !== Number(key));
-  // save to local storage
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  
   // update the index of the remaining todo items
   todoItems.forEach((item, i) => {
     item.index = i;
   });
+  
+  // save to local storage
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
 
-  // render todo item
+  // render the todo list
   renderTodo(todo);
 };
+
 
 // select form
 const form = document.querySelector('.todo-form');
@@ -139,12 +142,18 @@ list.addEventListener('keypress', (e) => {
 list.addEventListener('click', (e) => {
   if (e.target.classList.contains('delete')) {
     const itemKey = e.target.parentElement.dataset.key;
-    deleteTodo(itemKey);
-
     // reorder the index of the remaining tasks
     todoItems.forEach((item, index) => {
       item.index = index;
     });
+
+    // update local storage
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+
+    // delete task
+    deleteTodo(itemKey);
+    renderTodo();
+
   }
 });
 
