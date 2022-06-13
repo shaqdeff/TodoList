@@ -13,6 +13,7 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: "/TodoList/",
     filename: '[name].js',
     clean: true,
   },

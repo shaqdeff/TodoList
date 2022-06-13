@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "webpack": "node_modules/.bin/webpack -w",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "@lhci/cli": "^0.9.0",
+    "gh-pages": "^4.0.0",
     "lighthouse": "^9.6.1"
   }
 }
