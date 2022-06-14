@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "webpack": "node_modules/.bin/webpack -w",
+    "webpack": "node_modules/.bin/webpack",
     "start": "webpack serve --open",
     "deploy": "gh-pages -d dist"
   },
