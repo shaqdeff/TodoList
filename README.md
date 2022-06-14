@@ -19,6 +19,10 @@ To get a local copy up and running follow these simple steps.
 - Live Server: A web extension utility for Visual Studio Code that helps you live reload feature for dynamic pages.
 - Basic knowledge on HTML and CSS.
 
+## Live Demo
+
+- Click [here](https://shaqdeff.github.io/TodoList/) to view the live demo.
+
 ### Setup
 
 - With git, clone the code to your machine, or download a ZIP of all the files directly.
